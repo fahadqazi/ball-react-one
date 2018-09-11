@@ -38,10 +38,22 @@ export default class Ball extends React.Component {
 
   chartRef = React.createRef();
 
-  componentDidMount() {
-    const { margin, width, height } = this.props;
+  componentDidMount(){
+    this.updateChart()
+  }
+
+  updateChart() {
+    console.log('=================================================')
+    const { margin, width, height, data } = this.props;
     const { xScale, yScale } = this.state;
     const chartElement = d3.select(this.chartRef.current);
+
+    console.log('Data from update function: ', data)
+
+      xScale.domain([d3.min(data, d => d.x), d3.max(data, d => d.x)])
+
+      yScale.domain([d3.min(data, d => d.y), d3.max(data, d => d.y)])
+
 
     const svg = chartElement
       .attr("width", width)
@@ -85,20 +97,16 @@ export default class Ball extends React.Component {
     return prevState;
   }
 */
-  shouldComponentUpdate(){
-    return true
+
+componentDidUpdate(prevProps, prevState){
+    console.log('prevProps: ', prevProps)
+    console.log('prevState: ', prevState)
+    this.updateChart()
   }
-
-  componentDidUpdate(){
-    console.log('updating')
-    console.log('state: ', this.state)
-
-  }
-
 
   render() {
-    console.log('rendering')
-    const { width, height } = this.props;
+    const { width, height, data } = this.props;
+    // console.log('Data from Ball render: ', data)
     return (
       <svg width={width} height={height}>
         <g ref={this.chartRef} />

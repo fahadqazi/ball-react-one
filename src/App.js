@@ -25,7 +25,7 @@ class App extends Component {
         y: Math.floor(Math.random() * (50 - 20) + 20)
       });
     }
-    console.log('arr: ', arr)
+    // console.log('arr: ', arr)
     return arr;
   }
 
@@ -37,7 +37,7 @@ class App extends Component {
 
   render() {
     const {margin, width, height, data} = this.state;
-    console.log('state now: ', this.state.data)
+    // console.log('state now: ', this.state.data)
     return (
       <div>
         <button onClick={this.sendNewData} >new Data</button>
